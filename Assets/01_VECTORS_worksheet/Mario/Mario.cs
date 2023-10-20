@@ -25,14 +25,17 @@ public class Mario : MonoBehaviour
         //for the astronaut to move clockwise
         moveDir = moveDir.normalized * -1f;
 
+        //for the person to forward
         rb.AddForce(moveDir * force);
 
         gravityNorm = gravityDir.normalized;
+        //for the person to stay on the planet
         rb.AddForce(gravityNorm * gravityStrength);
 
-        float angle = Vector3.SignedAngle(transform.position,
+        float angle = Vector3.SignedAngle(Vector3.right,
             moveDir, Vector3.forward);
 
+        Debug.Log("angle" + angle);
         rb.MoveRotation(Quaternion.Euler(0, 0, angle));
 
         DebugExtension.DebugArrow(transform.position,
@@ -40,7 +43,7 @@ public class Mario : MonoBehaviour
 
         DebugExtension.DebugArrow(transform.position,
             moveDir, Color.blue);
-        Debug.Log(moveDir + " + " +gravityDir);
+        Debug.Log(Vector3.right + " + " +moveDir + " + " +gravityDir);
     }
 }
 
