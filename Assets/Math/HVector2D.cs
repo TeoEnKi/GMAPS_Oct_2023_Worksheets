@@ -30,7 +30,7 @@ public class HVector2D
         y = 0;
         h = 1.0f;
     }
-
+    //overloading operator
     public static HVector2D operator +( HVector2D a, HVector2D b)
     {
         return new HVector2D(a.x + b.x, a.y + b.y);
@@ -43,7 +43,7 @@ public class HVector2D
 
     public static HVector2D operator *(HVector2D a, float scalar)
     {
-        return new HVector2D(a.x * scalar, a.x * scalar);
+        return new HVector2D(a.x * scalar, a.y * scalar);
     }
 
     public static HVector2D operator /(HVector2D a, float scalar)
@@ -80,12 +80,12 @@ public class HVector2D
 
     public Vector2 ToUnityVector2()
     {
-        return Vector2.zero; // change this
+        return new Vector2(x, y); 
     }
 
     public Vector3 ToUnityVector3()
     {
-        return new Vector3(x,y,0); // change this
+        return new Vector3(x,y,0); 
     }
 
     // public void Print()
