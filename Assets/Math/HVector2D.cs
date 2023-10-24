@@ -65,6 +65,7 @@ public class HVector2D
 
     public float DotProduct(HVector2D vec)
     {
+        //length of projection of a vector on another vector
         return (x * vec.x + y * vec.y);
     }
 
@@ -77,6 +78,7 @@ public class HVector2D
 
     public float FindAngle(HVector2D vec)
     {
+        //returns the cosine angle that is between the 2 vectors
         return (float)Mathf.Acos(DotProduct(vec) / (Magnitude() * vec.Magnitude()));
     }
 

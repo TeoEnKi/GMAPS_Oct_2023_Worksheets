@@ -156,6 +156,7 @@ public class VectorExercises : MonoBehaviour
         HVector2D v1 = b - a;
         HVector2D v2 = c - a;
 
+        // for v2 to be projected on v1
         HVector2D proj = v2.Projection(v1);
 
         DebugExtension.DebugArrow(a.ToUnityVector3(), b.ToUnityVector3(), Color.red, 60f);
