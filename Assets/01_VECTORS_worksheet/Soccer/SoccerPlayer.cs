@@ -15,7 +15,7 @@ public class SoccerPlayer : MonoBehaviour
         OtherPlayers = FindObjectsOfType<SoccerPlayer>().Where(t => t != this).ToArray();
         if (IsCaptain)
         {
-            AlignInCircle();
+            //AlignInCircle();
             FindMinimum();
         }
     }
@@ -29,53 +29,80 @@ public class SoccerPlayer : MonoBehaviour
             Debug.Log(height);
             num.Add(height);
         }
-        Debug.Log("The minimum height is: "+ num.Min());
+        Debug.Log("The minimum height is: " + num.Min());
     }
 
-    //float Magnitude(Vector3 vector)
-    //{
-
-    //}
-
-    //Vector3 Normalise(Vector3 vector)
-    //{
-
-    //}
-
-    //float Dot(Vector3 vectorA, Vector3 vectorB)
-    //{
-
-    //}
-
-    //SoccerPlayer FindClosestPlayerDot()
-    //{
-    //    SoccerPlayer closest = null;
-
-    //    return closest;
-    //}
-
-    void AlignInCircle()
+    float Magnitude(Vector3 vector)
     {
-        float currentAngle = 0;
-        float intervalAngle = 360 / OtherPlayers.Length;
-        foreach (SoccerPlayer other in OtherPlayers)
-        {
-            //return (float)Mathf.Acos(Dot(vec) / (Magnitude() * vec.Magnitude()));
-
-            //Vector3 otherDesPos = 
-            //cos45
-            //360/8=45
-        }
+        return (vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
     }
+
+    Vector3 Normalise(Vector3 vector)
+    {
+        float mag = Magnitude(vector);
+        vector.x /= mag;
+        vector.y /= mag;
+        vector.z /= mag;
+        return vector;
+    }
+
+    float Dot(Vector3 vectorA, Vector3 vectorB)
+    {
+        return (vectorA.x * vectorB.x + vectorA.y * vectorB.y + vectorA.z * vectorB.z);
+    }
+
+    SoccerPlayer FindClosestPlayerDot()
+    {
+        SoccerPlayer closest = null;
+        float minAngle = 180f;
+
+        for (int i = 0; i < OtherPlayers.Length; i++)
+        {
+            Vector3 toPlayer = OtherPlayers[i].transform.position - transform.position;
+            toPlayer = Normalise(toPlayer);
+
+            float dot = Dot(transform.forward, toPlayer);
+            float angle = Mathf.Acos(dot);
+            angle *= Mathf.Rad2Deg;
+
+            if (angle < minAngle)
+            {
+                minAngle = angle;
+                closest = OtherPlayers[i];
+            }
+        }
+        return closest;
+    }
+
+    //void AlignInCircle()
+    //{
+    //    float currentAngle = 0;
+    //    float intervalAngle = 360 / OtherPlayers.Length;
+    //    foreach (SoccerPlayer other in OtherPlayers)
+    //    {
+    //        return (float)Mathf.Acos(Dot(vec) / (Magnitude() * vec.Magnitude()));
+
+    //        Vector3 otherDesPos =
+    //        cos45
+    //        360 / 8 = 45
+    //    }
+    //}
     void DrawVectors()
     {
         foreach (SoccerPlayer other in OtherPlayers)
         {
-            if (!other.IsCaptain)
+            Vector3 orgin = other.transform.position;
+            foreach (SoccerPlayer notOrgin in OtherPlayers)
             {
-                Vector3 dir = other.transform.position - transform.position;
-                Debug.DrawRay(transform.position, dir, Color.black);
+                if (!notOrgin.IsCaptain && !other.IsCaptain)
+                {
+                    Vector3 dir = notOrgin.transform.position - orgin;
+                    Debug.DrawRay(orgin, dir, Color.black);
+                }
+
             }
+
+
         }
     }
 
@@ -88,10 +115,17 @@ public class SoccerPlayer : MonoBehaviour
             angle += Input.GetAxis("Horizontal") * rotationSpeed;
             transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
             Debug.DrawRay(transform.position, transform.forward * 10f, Color.red);
-        }
-        else
-        {
+
             DrawVectors();
+
+            SoccerPlayer targetPlayer = FindClosestPlayerDot();
+            targetPlayer.GetComponent<Renderer>().material.color = Color.green;
+
+            //for the other soccer players that are no longer target, they become white
+            foreach (SoccerPlayer other in OtherPlayers.Where(t => t != targetPlayer))
+            {
+                other.GetComponent<Renderer>().material.color = Color.white;
+            }
         }
     }
 }
