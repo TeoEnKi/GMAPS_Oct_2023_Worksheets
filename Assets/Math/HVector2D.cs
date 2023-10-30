@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
+//using Unity.VisualScripting;
 
 //[Serializable]
 public class HVector2D
@@ -65,12 +65,13 @@ public class HVector2D
 
     public float DotProduct(HVector2D vec)
     {
-        //length of projection of a vector on another vector
+        //length of projection of vec on another vector
         return (x * vec.x + y * vec.y);
     }
 
     public HVector2D Projection(HVector2D b)
     {
+        //vector of projection from orgin proj a/ proj b
         HVector2D proj = b * (DotProduct(b) / b.DotProduct(b));
         return proj;
 

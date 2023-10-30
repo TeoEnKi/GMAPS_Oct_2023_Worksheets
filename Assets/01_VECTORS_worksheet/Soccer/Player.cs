@@ -7,20 +7,24 @@ public class Player : MonoBehaviour
     public bool IsCaptain = true;
     public Player OtherPlayer;
 
-    //float Magnitude(Vector3 vector)
-    //{
-    //    // Your code here
-    //}
+    float Magnitude(Vector3 vector)
+    {
+        return (vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
+    }
 
-    //Vector3 Normalise(Vector3 vector)
-    //{
-    //    // Your code here
-    //}
+    Vector3 Normalise(Vector3 vector)
+    {
+        float mag = Magnitude(vector);
+        vector.x /= mag;
+        vector.y /= mag;
+        vector.z /= mag;
+        return vector;
+    }
 
-    //float Dot(Vector3 vectorA, Vector3 vectorB)
-    //{
-    //    // Your code here
-    //}
+    float Dot(Vector3 vectorA, Vector3 vectorB)
+    {
+        return (vectorA.x * vectorB.x + vectorA.y * vectorB.y + vectorA.z * vectorB.z);
+    }
 
     //float AngleToPlayer()
     //{
@@ -47,7 +51,7 @@ public class Player : MonoBehaviour
     //    //     1.2 Find the position of Other (B -- to)
     //    //     1.3 Calculate B-A to get the vector from A to B
     //    // 2. Draw the arrow to represent visually the vector AB
-    //    //
+    //    // 
 
     //    // Your code here
 
@@ -70,8 +74,13 @@ public class Player : MonoBehaviour
     {
         if (IsCaptain)
         {
-            //float angle = // Your code here
-            //Debug.Log(angle);
+            Vector3 direction = OtherPlayer.transform.position-transform.position;
+            DebugExtension.DebugArrow(transform.position, direction, Color.black);
+
+            DebugExtension.DebugArrow(transform.position, transform.forward, Color.blue);
+
+            float angle = Dot(transform.forward,direction);
+            Debug.Log(angle);
         }
     }
 }
