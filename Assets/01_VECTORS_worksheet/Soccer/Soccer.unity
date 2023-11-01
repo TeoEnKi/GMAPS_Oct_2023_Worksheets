@@ -279,7 +279,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsCaptain: 1
-  OtherPlayers: []
+  OtherPlayers:
+  - {fileID: 1961090143}
+  - {fileID: 1869517077}
+  - {fileID: 1731149085}
+  - {fileID: 943914671}
+  - {fileID: 1099839454}
+  - {fileID: 180692087}
+  - {fileID: 1024180120}
+  - {fileID: 1400767175}
   rotationSpeed: 1
 --- !u!136 &200578738
 CapsuleCollider:
