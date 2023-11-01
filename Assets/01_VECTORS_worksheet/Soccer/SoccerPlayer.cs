@@ -15,7 +15,7 @@ public class SoccerPlayer : MonoBehaviour
         OtherPlayers = FindObjectsOfType<SoccerPlayer>().Where(t => t != this).ToArray();
         if (IsCaptain)
         {
-            //AlignInCircle();
+            AlignInCircle();
             FindMinimum();
         }
     }
@@ -73,20 +73,20 @@ public class SoccerPlayer : MonoBehaviour
         }
         return closest;
     }
+    //https://www.youtube.com/watch?v=Ta8TIXP7HXo
+    void AlignInCircle()
+    {
+        
+        for (int i = 0; i < OtherPlayers.Length; i++)
+        {
+            //a full circle is 2pi (rad): https://www.youtube.com/watch?v=uix2K_D1aNA
+            float angle = i * (2 * Mathf.PI / OtherPlayers.Length);
 
-    //void AlignInCircle()
-    //{
-    //    float currentAngle = 0;
-    //    float intervalAngle = 360 / OtherPlayers.Length;
-    //    foreach (SoccerPlayer other in OtherPlayers)
-    //    {
-    //        return (float)Mathf.Acos(Dot(vec) / (Magnitude() * vec.Magnitude()));
+            Vector3 tPlayerPosition = new Vector3(Mathf.Cos(angle) * 10 + transform.position.x, transform.position.y, Mathf.Sin(angle) * 10 + transform.position.z);
 
-    //        Vector3 otherDesPos =
-    //        cos45
-    //        360 / 8 = 45
-    //    }
-    //}
+            OtherPlayers[i].transform.position = tPlayerPosition;
+        }
+    }
     void DrawVectors()
     {
         foreach (SoccerPlayer other in OtherPlayers)
