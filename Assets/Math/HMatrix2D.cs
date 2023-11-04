@@ -176,25 +176,26 @@ public class HMatrix2D : MonoBehaviour
         return false;
     }
 
-    public void setTranslationMat(float transX, float transY)
+    public void SetTranslationMat(float transX, float transY)
     {
-        // your code here
+        SetIdentity();
+        Entries[0, 0] = transX;
+        Entries[1, 1] = transY;
     }
 
-    public void setRotationMat(float rotDeg)
+    public void SetRotationMat(float rotDeg)
     {
         SetIdentity();
         float rot = rotDeg * Mathf.Deg2Rad;
-        Entries[0,0] = new HMatrix2D(
-            //)
-            //code
-        // your code here
+        Entries[0, 0] = Mathf.Cos(rot);
+        Entries[0, 1] = -Mathf.Sin(rot);
+        Entries[1, 0] = Mathf.Sin(rot);
+        Entries[1, 1] = Mathf.Cos(rot);
     }
 
     //for qn4 i think
     public void setScalingMat(float scaleX, float scaleY)
     {
-        // your code here
-    }
 
+    }
 }
