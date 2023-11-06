@@ -179,8 +179,8 @@ public class HMatrix2D : MonoBehaviour
     public void SetTranslationMat(float transX, float transY)
     {
         SetIdentity();
-        Entries[0, 0] = transX;
-        Entries[1, 1] = transY;
+        Entries[0, 2] = transX;
+        Entries[1, 2] = transY;
     }
 
     public void SetRotationMat(float rotDeg)
