@@ -193,7 +193,7 @@ public class HMatrix2D : MonoBehaviour
         Entries[1, 1] = Mathf.Cos(rot);
     }
 
-    //for qn4 i think
+    //did not use, not in doc
     public void setScalingMat(float scaleX, float scaleY)
     {
 
