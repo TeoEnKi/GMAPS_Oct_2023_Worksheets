@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Table
+    uniqueID: 4002118177
+    locked: 0
+  - name: Edge
+    uniqueID: 1286740401
+    locked: 0
+  - name: Hole
+    uniqueID: 98927319
+    locked: 0
+  - name: Ball
+    uniqueID: 4089935823
+    locked: 0

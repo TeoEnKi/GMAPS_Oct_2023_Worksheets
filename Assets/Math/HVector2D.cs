@@ -48,7 +48,7 @@ public class HVector2D
 
     public static HVector2D operator /(HVector2D a, float scalar)
     {
-        return new HVector2D(a.x / scalar, a.x / scalar);
+        return new HVector2D(a.x / scalar, a.y / scalar);
     }
 
     public float Magnitude()
