@@ -24,7 +24,7 @@ public class PoolCue : MonoBehaviour
             var startLinePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Start line drawing
             if(ball != null && ball.IsCollidingWith(startLinePos.x,startLinePos.y))
             {
-                drawnLine = lineFactory.GetLine(new Vector2(ball.Position.x, ball.Position.y), startLinePos, 1f, UnityEngine.Color.black);
+                drawnLine = lineFactory.GetLine(startLinePos, new Vector2(ball.Position.x, ball.Position.y), 1f, UnityEngine.Color.black);
                 drawnLine.EnableDrawing(true);
             }
         }
@@ -42,7 +42,9 @@ public class PoolCue : MonoBehaviour
         //when dragging the mouse is outside the ball
         if (drawnLine != null)
         {
-            drawnLine.end = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Update line end
+            drawnLine.start = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Update line end
+            drawnLine.end = new Vector2(ball.Position.x, ball.Position.y);
         }
     }
 
