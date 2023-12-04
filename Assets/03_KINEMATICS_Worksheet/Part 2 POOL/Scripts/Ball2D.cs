@@ -42,8 +42,8 @@ public class Ball2D : MonoBehaviour
 
     private void UpdateBall2DPhysics(float deltaTime)
     {
-        float displacementX = -Velocity.x * deltaTime;
-        float displacementY = -Velocity.y * deltaTime;
+        float displacementX = Velocity.x * deltaTime;
+        float displacementY = Velocity.y * deltaTime;
 
         Position.x += displacementX;
         Position.y += displacementY;
