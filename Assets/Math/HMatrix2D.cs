@@ -129,15 +129,15 @@ public class HMatrix2D : MonoBehaviour
         //getlength gets the number of rows/columns in a matrix
         int leftR = left.Entries.GetLength(0);
         int rightC = right.Entries.GetLength(1);
-        //
+        //use the left matrix row and right matrix column to get the dimensions of the resultant matrix
         float[,] result = new float[leftR, rightC];
-        //looping through each row
+        //looping through each row of 1st mat
         for (int y = 0; y < leftR; y++)
         {
-            //looping through each column
+            //looping through each column of 2nd mat
             for (int x = 0; x < rightC; x++)
             {
-                //pos is to get the value in the next position of the sequence of a row/ column
+                //pos is to get the value from multiplying elements fromm a certain row/column that have the same position in that set of elements then adding those multiplied values to get the resultant value
                 for (int pos = 0; pos < 3; pos++)
                 {
                     result[y, x] += left.Entries[y, pos] * right.Entries[pos, x];
