@@ -19,6 +19,7 @@ public class PoolCue : MonoBehaviour
 
     void Update()
     {
+        //Checks if the mouse is clicked inside the ball before creating a line.
         if (Input.GetMouseButtonDown(0))
         {
             var startLinePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Start line drawing
@@ -28,6 +29,7 @@ public class PoolCue : MonoBehaviour
                 drawnLine.EnableDrawing(true);
             }
         }
+        //if left mouse button is up, the line is set to null and ball is pushed away from mouse position where
         else if (Input.GetMouseButtonUp(0) && drawnLine != null)
         {
             drawnLine.EnableDrawing(false);
@@ -39,7 +41,7 @@ public class PoolCue : MonoBehaviour
             drawnLine = null; // End line drawing            
         }
 
-        //when dragging the mouse is outside the ball
+        //when dragging and to update line when the mouse is outside the ball
         if (drawnLine != null)
         {
             drawnLine.start = Camera.main.ScreenToWorldPoint(Input.mousePosition);
