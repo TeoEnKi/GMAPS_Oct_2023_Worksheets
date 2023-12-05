@@ -123,6 +123,7 @@ public class HMatrix2D : MonoBehaviour
             left.Entries[1, 0] * right.x + left.Entries[1, 1] * right.y + left.Entries[1, 2] * right.h
         );
     }
+    //refer to image: https://www.linkedin.com/pulse/matrix-multiplication-explained-tivadar-danka/ 
     public static HMatrix2D operator *(HMatrix2D left, HMatrix2D right)
     {
         //getlength gets the number of rows/columns in a matrix
@@ -137,7 +138,6 @@ public class HMatrix2D : MonoBehaviour
             for (int x = 0; x < rightC; x++)
             {
                 //pos is to get the value in the next position of the sequence of a row/ column
-                //refer to image: https://www.linkedin.com/pulse/matrix-multiplication-explained-tivadar-danka/ 
                 for (int pos = 0; pos < 3; pos++)
                 {
                     result[y, x] += left.Entries[y, pos] * right.Entries[pos, x];
