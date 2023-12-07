@@ -5,7 +5,7 @@
  public class Motion : MonoBehaviour
  {
      public Vector3 Velocity;
-
+    //move sphere at a velocity for a certain time
      void FixedUpdate()
      {
          float dt = Time.deltaTime;

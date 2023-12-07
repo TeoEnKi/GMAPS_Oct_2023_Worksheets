@@ -38,7 +38,7 @@ public class TransformMesh : MonoBehaviour
         //update the values
         pos = transformMatrix * pos;
     }
-
+    //move sonic to origin, rotate at desired angle, move sonic back to original position
     void Rotate(float angle)
     {
         HMatrix2D toOriginMatrix = new HMatrix2D();
@@ -58,6 +58,8 @@ public class TransformMesh : MonoBehaviour
 
     private void Transform()
     {
+        //for every vertice of the mesh, multiply the transform matrix to the vertice
+        //take all the new vertices positions and assign to cloned mesh vertices
         vertices = meshManager.clonedMesh.vertices;
 
         for (int i = 0; i < vertices.Length; i++)

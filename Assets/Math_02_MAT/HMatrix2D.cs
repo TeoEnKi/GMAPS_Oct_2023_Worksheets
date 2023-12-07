@@ -5,6 +5,7 @@ public class HMatrix2D : MonoBehaviour
 
     public float[,] Entries { get; set; } = new float[3, 3];
 
+    //3 constructors for HMatrix2D
     public HMatrix2D()
     {
         SetIdentity();
@@ -55,6 +56,8 @@ public class HMatrix2D : MonoBehaviour
         //        }
         //    }
         //}
+
+        //diagonal elements are 1
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
@@ -63,16 +66,19 @@ public class HMatrix2D : MonoBehaviour
             }
         }
     }
+
+    //print matrices
     public void Print()
     {
         string grid = "";
-
+        //for every row, every column in that row will be printed
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
             {
                 grid = grid + Entries[y, x] + " ";
             }
+            //after whole row is printed a new line will be appended for the second row to be printed
             grid += "\n";
 
         }
@@ -81,6 +87,8 @@ public class HMatrix2D : MonoBehaviour
     }
     public static HMatrix2D operator +(HMatrix2D left, HMatrix2D right)
     {
+        //create a result matrix, 
+        //and for every result element, add the elements (with the same row and column) of the right and left matrix.
         HMatrix2D result = new HMatrix2D();
         for (int y = 0; y < 3; y++)
         {
@@ -93,6 +101,8 @@ public class HMatrix2D : MonoBehaviour
     }
     public static HMatrix2D operator -(HMatrix2D left, HMatrix2D right)
     {
+        //create a result matrix, 
+        //and for every result element, subtract the element (with the same row and column) of the left matrix from the element of the right matrix
         HMatrix2D result = new HMatrix2D();
         for (int y = 0; y < 3; y++)
         {
@@ -105,6 +115,9 @@ public class HMatrix2D : MonoBehaviour
     }
     public static HMatrix2D operator *(HMatrix2D left, float scalar)
     {
+        //create a result matrix, 
+        //and for every result element, multiply the element (with the same row and column) of the left matrix to the scalar
+
         HMatrix2D result = new HMatrix2D();
         for (int y = 0; y < 3; y++)
         {
@@ -117,6 +130,7 @@ public class HMatrix2D : MonoBehaviour
     }
     public static HVector2D operator *(HMatrix2D left, HVector2D right)
     {
+        //and for every result element, multiply the element (of a certain position in the row) of the left matrix to the element (to a same position in the column) of the Vector matrix
         return new HVector2D
         (
             left.Entries[0, 0] * right.x + left.Entries[0, 1] * right.y + left.Entries[0, 2] * right.h,
@@ -146,9 +160,9 @@ public class HMatrix2D : MonoBehaviour
         }
         return new HMatrix2D(result);
     }
-
     public static bool operator ==(HMatrix2D left, HMatrix2D right)
     {
+        //check if for every element in left matrix is the same for every element in the right matrix
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
@@ -163,6 +177,7 @@ public class HMatrix2D : MonoBehaviour
     }
     public static bool operator !=(HMatrix2D left, HMatrix2D right)
     {
+        //check if any of the elements in left matrix is different from any of the element in the right matrix,
         for (int y = 0; y < 3; y++)
         {
             for (int x = 0; x < 3; x++)
@@ -175,14 +190,14 @@ public class HMatrix2D : MonoBehaviour
         }
         return false;
     }
-
+    //make a translation matrix based on the given translation values to move point by
     public void SetTranslationMat(float transX, float transY)
     {
         SetIdentity();
         Entries[0, 2] = transX;
         Entries[1, 2] = transY;
     }
-
+    //make a rotation matrix based on the given degree to rotate point by (but converted to rad because of the method's parameter)
     public void SetRotationMat(float rotDeg)
     {
         SetIdentity();

@@ -9,7 +9,7 @@ public class HVector2D
 {
     public float x, y;
     public float h;
-
+    //3 HVector2D constructors
     public HVector2D(float _x, float _y)
     {
         x = _x;
